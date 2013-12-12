@@ -1,51 +1,47 @@
-! XTerm window settings
+! xterm window settings
 
-!XTerm*font: 9x15
-XTerm*font: 7x14
-XTerm*scrollBar: true
-XTerm*background: black
-XTerm*foreground: gray70
-XTerm*saveLines: 32000
-
-XTerm*geometry: 80x40+0+0
-XTerm*loginShell: true
-XTerm*jumpScroll: true
-XTerm*scrollTtyOutput: false
-XTerm*scrollKeypress: true
+xterm*background: black
+xterm*foreground: gray
+xterm*geometry: 80x60+0+0
+!xterm*font: 9x15
+!xterm*font: 7x14
+xterm*scrollBar: true
+xterm*saveLines: 32000
+xterm*loginShell: true
+xterm*jumpScroll: true
+xterm*scrollTtyOutput: false
+xterm*scrollKeypress: true
 
 ! Dtterm window settings
 
-Dtterm*userFont: 7x14
-Dtterm*scrollBar: true
-Dtterm*rightScrollBar: true
-Dtterm*background: black
-Dtterm*foreground: gray70
-Dtterm*saveLines: 32000
-Dtterm*geometry: 80x30+0+0
-Dtterm*loginShell: true
-Dtterm*jumpScroll: true
-Dtterm*scrollTtyOutput: false
-Dtterm*scrollKeypress: true
-
+!Dtterm*userFont: 7x14
+!Dtterm*scrollBar: true
+!Dtterm*rightScrollBar: true
+!Dtterm*background: black
+!Dtterm*foreground: gray70
+!Dtterm*saveLines: 32000
+!Dtterm*geometry: 80x30+0+0
+!Dtterm*loginShell: true
+!Dtterm*jumpScroll: true
+!Dtterm*scrollTtyOutput: false
+!Dtterm*scrollKeypress: true
 
 ! Emacs windows settings
 
-Emacs.geometry: 80x50+0+0
-!Emacs.font: 7x14
+Emacs.geometry: 80x60+0+0
+Emacs.background: black
+Emacs.foreground: gray70
+Emacs.font: 7x14
 !Emacs.font: 8x13
 !Emacs.font: 8x16
 !Emacs.font: 9x15
 !Emacs.font: fixed
-
 !Emacs.font: -sony-fixed-medium-r-normal--0-0-100-100-c-0-iso8859-1
 !Emacs.font: -sony-fixed-medium-r-normal--16-120-100-100-c-80-iso8859-1
-
-Emacs.font: -sony-fixed-medium-r-normal--16-150-75-75-c-80-iso8859-1
-
+!Emacs.font: -sony-fixed-medium-r-normal--16-150-75-75-c-80-iso8859-1
 !Emacs.font: -misc-fixed-medium-r-normal--14-110-100-100-c-70-iso8859-1
 !Emacs.font: -misc-fixed-medium-r-normal--15-120-100-100-c-90-iso8859-1
 !Emacs.font: -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-1
-
 !Emacs.font: -misc-fixed-medium-r-normal--0-0-75-75-c-0-iso646.1991-irv
 !Emacs.font: -misc-fixed-medium-r-normal--0-0-75-75-c-0-iso8859-1
 !Emacs.font: -misc-fixed-medium-r-normal--0-0-75-75-c-0-iso8859-8
@@ -61,5 +57,4 @@ Emacs.font: -sony-fixed-medium-r-normal--16-150-75-75-c-80-iso8859-1
 !Emacs.font: -misc-fixed-medium-r-normal--14-140-75-75-c-70-iso8859-1
 !Emacs.font: -misc-fixed-medium-r-normal--15-120-100-100-c-90-iso8859-1
 
-Emacs.background: black
-Emacs.foreground: gray70
+

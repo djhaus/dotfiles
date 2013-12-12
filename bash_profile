@@ -1,11 +1,9 @@
-#
-# This file is executed by bash for login shells.
-#
-# To keep things simple and consistent, actual shell setup
-# is done in .bashrc.
-#
-# Don't modify this file unless you know what you're doing.
-#
+# MacPorts Installer addition on 2013-11-16_at_18:58:20: adding an appropriate PATH variable for use with MacPorts.
 
-if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+fi

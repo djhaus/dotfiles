@@ -13,7 +13,15 @@
 (setq running-emacs-19 (>= emacs-major-version 19))
 (setq running-fsf-emacs-19 (and running-emacs-19 (not running-xemacs)))
 (setq running-emacs-18 (< emacs-major-version 19))
+
+; Determine if we're running X-Windows 
+
 (setq running-x (eq window-system 'x))
+
+; Set the window height on windowed systems
+
+(if (window-system)
+  (set-frame-height (selected-frame) 50))
 
 ; Determine which operating system we are running on
 
@@ -30,13 +38,20 @@
 (if (string-equal system-type "cygwin")
     (setq running-cygwin t))
 
-; Disable the Emacs splash screen
+; Disable the Emacs splash/startup stuff
 
-(setq inhibit-splash-screen t)
+(setq inhibit-startup-screen t)
+(setq initial-scratch-message nil)
 
 ; Enable automatic copy on selection
 
 (setq mouse-drag-copy-region t)
+
+; When using the mouse wheel to scroll only move 1 line at a time
+(setq mouse-wheel-scroll-amount '(1))
+
+; Use progressive mouse whell scrolling
+(setq mouse-wheel-progressive-speed nil)
 
 ; Set the default face foreground and background colors
 
@@ -55,35 +70,10 @@
 ;       (if (>= emacs-major-version 21)
 ;	 (require 'xcscope))))
 
-; Load Klocwork frontend on Emacs versions 21.x.x on UNIX systems
-
-;(cond (running-unix
-;       (if (>= emacs-major-version 21)
-;	 (load-file "~/emacs/inForce-emacs-K7.7.el"))))
-
 
 ; Set the load path to the emacs directory in the user's home directory
 
 (add-to-list 'load-path "~/emacs")
-
-; Set the cscope database file
-
-(setq cscope-database-file "/vobs/OS/cscope.out")
-
-; Bind cscope functions to keys for faster access 
-
-(define-key global-map [(control f3)]  'cscope-set-initial-directory)
-(define-key global-map [(control f4)]  'cscope-unset-initial-directory)
-(define-key global-map [(control f5)]  'cscope-find-this-symbol)
-(define-key global-map [(control f6)]  'cscope-find-global-definition)
-(define-key global-map [(control f7)]  'cscope-find-global-definition-no-prompting)
-(define-key global-map [(control f8)]  'cscope-pop-mark)
-(define-key global-map [(control f9)]  'cscope-next-symbol)
-(define-key global-map [(control f10)] 'cscope-next-file)
-(define-key global-map [(control f11)] 'cscope-prev-symbol)
-(define-key global-map [(control f12)] 'cscope-prev-file)
-(define-key global-map [(meta f9)]  'cscope-display-buffer)
-(define-key global-map [(meta f10)] 'cscope-display-buffer-toggle)
 
 ; Configue conservative scrolling so that the cursor doesn't jump
 ; back to the center line of the window after scolling up/down by a
@@ -115,20 +105,12 @@
 
 ; Save multiple backup file versions
  
-(setq delete-old-versions t
-      kept-new-versions 5
-      kept-old-versions 2
-      version-control t)
+(setq delete-old-versions t)
 
-; Default compile commands
+; Compilation related
 
-(setq compile-command "clearmake")
 (setq compilation-scroll-output t)
 (setq compilation-window-height 20)
-
-; Set the location of E-TAGS file
-
-;(setq tags-table-list '("/vobs/OS"))
 
 ; Re-map home and end keys to jump to start and end of line
 
@@ -146,11 +128,16 @@
 
 ; Keybindings for my custome functions
 
-(global-set-key [f3] 'my-find-tag)
-(global-set-key [f4] 'next-find-tag)
-(global-set-key [f5] 'mparen)
-(global-set-key [f6] 'c-inside)
-(global-set-key [f7] 'match-paren)
+;(global-set-key [f3] 'my-find-tag)
+;(global-set-key [f4] 'next-find-tag)
+;(global-set-key [f5] 'mparen)
+;(global-set-key [f6] 'c-inside)
+;(global-set-key [f7] 'match-paren)
+
+; When run on a Mac map the help key to be insert
+
+(cond (running-osx
+       (global-set-key [help] 'overwrite-mode)))
 
 ; Allow selected text to be deleted by pressing the delete key
 
@@ -182,38 +169,38 @@
 
 ; Mouse scrolling
 
-(defun up-slightly ()
-  (interactive) 
-  (scroll-up 5))
+;(defun up-slightly ()
+;  (interactive) 
+;  (scroll-up 5))
 
-(defun down-slightly ()
-  (interactive)
-  (scroll-down 5))
+;(defun down-slightly ()
+;  (interactive)
+;  (scroll-down 5))
 
-(global-set-key [mouse-4] 'down-slightly)
-(global-set-key [mouse-5] 'up-slightly)
+;(global-set-key [mouse-4] 'down-slightly)
+;(global-set-key [mouse-5] 'up-slightly)
  
-(defun up-one ()
-  (interactive)
-  (scroll-up 1))
+;(defun up-one ()
+;  (interactive)
+;  (scroll-up 1))
 
-(defun down-one ()
-  (interactive)
-  (scroll-down 1))
+;(defun down-one ()
+;  (interactive)
+;  (scroll-down 1))
 
-(global-set-key [S-mouse-4] 'down-one)
-(global-set-key [S-mouse-5] 'up-one)
+;(global-set-key [S-mouse-4] 'down-one)
+;(global-set-key [S-mouse-5] 'up-one)
  
-(defun up-a-lot ()
-  (interactive)
-  (scroll-up))
+;(defun up-a-lot ()
+;  (interactive)
+;  (scroll-up))
 
-(defun down-a-lot ()
-  (interactive)
-  (scroll-down))
+;(defun down-a-lot ()
+;  (interactive)
+;  (scroll-down))
 
-(global-set-key [C-mouse-4] 'down-a-lot)
-(global-set-key [C-mouse-5] 'up-a-lot)
+;(global-set-key [C-mouse-4] 'down-a-lot)
+;(global-set-key [C-mouse-5] 'up-a-lot)
 
 
 ; Turn syntax highlighting on when editing source code
@@ -271,14 +258,6 @@
       (set-face-foreground 'font-lock-variable-name-face "Brown")
       (set-face-foreground 'font-lock-reference-face "CadetBlue")
       (set-face-foreground 'font-lock-preprocessor-face "CornFlowerBlue")))
-
-; BSR E-tags settings
-
-(defun bsr-tags ()
-  ""
-  (interactive)
-  (tags-reset-tags-tables)
-  (setq tags-table-list '("/vobs/OS")))
 
 ; My-Find-Tag
 
@@ -644,110 +623,4 @@
       )
     )
 )
-
-; Compile commands below only compile the code in the directory of the
-; file you are currently editing. They DO NOT generate an archive file.
-; To generate an archive file to load on a BSR you must issue a build
-; command listed just below.
-
-(defun compile-1x8-cmts-directory ()
-  "Compile a directory for the 1x8 CMTS project"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "source /vobs/OS/proj/cmts/env.sh; clearmake")
-  (compile compile-command))
-
-(defun compile-2x8-cmts-directory ()
-  "Compile a directory for the 2x8 CMTS project"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "source /vobs/OS/proj/cmts_2x8ppc/env.sh; clearmake")
-  (compile compile-command))
-
-(defun compile-hsim2-directory ()
-  "Compile a directory for the HSIM2 project"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "source /vobs/OS/proj/hsim2/env.sh; clearmake")
-  (compile compile-command))
-
-(defun compile-hsim4-directory ()
-  "Compile a directory for the HSIM4 project"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "source /vobs/OS/proj/hsim4/env.sh; clearmake")
-  (compile compile-command))
-
-(defun compile-srm3-directory ()
-  "Compile a directory for the SRM3 project"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "source /vobs/OS/proj/srm3/env.sh; clearmake")
-  (compile compile-command))
-
-(defun compile-srm4-directory ()
-  "Compile a directory for the SRM4 project"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "source /vobs/OS/proj/srm4/env.sh; clearmake")
-  (compile compile-command))
-
-; The compile commands below build projects and the archive file
-
-(defun build-1x8-cmts ()
-  "Build the 1x8 CMTS project and replace it in the archive file"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "cd /vobs/OS/proj/archive; clearmake cmts1x8; upload")
-  (compile compile-command))
-
-(defun build-2x8-cmts ()
-  "Build the 2x8 CMTS project and replace it in the archive file"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "cd /vobs/OS/proj/archive; clearmake cmts2x8; upload")
-  (compile compile-command))
-
-(defun build-srm3 ()
-  "Build the SRM3 project and replace it in the archive file"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "cd /vobs/OS/proj/archive; clearmake srm3; upload")
-  (compile compile-command))
-
-(defun build-srm4 ()
-  "Build the SRM4 project and replace it in the archive file"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "cd /vobs/OS/proj/archive; clearmake srm4; upload")
-  (compile compile-command))
-
-(defun build-hsim2 ()
-  "Build the HSIM2 project and replace it in the archive file"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "cd /vobs/OS/proj/archive; clearmake hsim2; upload")
-  (compile compile-command))
-
-(defun build-hsim4 ()
-  "Build the HSIM4 project and replace it in the archive file"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "cd /vobs/OS/proj/archive; clearmake hsim4; upload")
-  (compile compile-command))
-
-(defun build-all3 ()
-  "Build a full archive with all images and FPGAs except SRM4"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "cd /vobs/OS/proj/archive; clearmake all3; upload")
-  (compile compile-command))
-
-(defun build-all4 ()
-  "Build a full archive with all images and FPGAs"
-  (interactive)
-  (save-buffer)
-  (setq compile-command "cd /vobs/OS/proj/archive; clearmake all4; upload")
-  (compile compile-command))
-
 
