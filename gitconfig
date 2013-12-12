@@ -1,0 +1,5 @@
+[user]
+	name = David Amenhauser
+	email = damenhau@akamai.com
+[credential]
+	helper = osxkeychain

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DOTFILES="bash_profile bashrc bash_aliases emacs gitconfig Xdefauls Xresources"
+
+for file in $DOTFILES
+do
+    echo "Creating symlink from ~/.$file to ~/dotfiles/$file"
+    ln -i -s ~/dotfiles/$file ~/.$file
+done
+
