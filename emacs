@@ -45,7 +45,7 @@
 
 ; Follow version controlled symlinks to the real file
 
-(setq vc-follow-symlinks t)
+(setq vc-follow-symlinks nil)
 
 ; Enable automatic copy on selection
 
