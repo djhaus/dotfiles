@@ -3,3 +3,7 @@
 	email = damenhau@akamai.com
 [credential]
 	helper = osxkeychain
+[core]
+	editor = emacs
+[color]
+	ui = true
