@@ -43,6 +43,10 @@
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
 
+; Follow version controlled symlinks to the real file
+
+(setq vc-follow-symlinks t)
+
 ; Enable automatic copy on selection
 
 (setq mouse-drag-copy-region t)
