@@ -43,7 +43,8 @@
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
 
-; Follow version controlled symlinks to the real file
+; Don't follow symlinks for version controlled files this ensures
+; that the proper major mode is selected for editing files
 
 (setq vc-follow-symlinks nil)
 
