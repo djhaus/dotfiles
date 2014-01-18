@@ -83,7 +83,6 @@ ssh_mkkeys()
 
     # Set the permissions for the various SSH files according to what
     # the Akamai guidelines suggest
-				   
 
     chmod -R 700 ~/.ssh
     chmod go-rwx ~/.ssh/*
@@ -145,14 +144,16 @@ if [ $? -eq 0 ]; then
 	 cleartool rmtype -rmall -force brtype:$1
    }
 
-   # ClearCase function to diff an element against the zero version on the branch
+   # ClearCase function to diff an element against the zero version on
+   # the branch
 
    function ctdiffz()
    {
 	cleartool diff -graphical $(cleartool describe -fmt "%n" $1 | sed 's%[0-9]*$%0%') $1
    }
 
-   # ClearCase function to diff an element with a specific label against its predecessor
+   # ClearCase function to diff an element with a specific label against
+   # its predecessor
 
    function ctdifflbl()
    {
