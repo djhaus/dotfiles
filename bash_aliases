@@ -17,7 +17,8 @@ alias sshx='ssh -X'
 alias sshlab='ssh -X -l root'
 alias sshroot='ssh -X -l root'
 alias type='type -all'
-alias vncserver='vncserver -geometry 1890x1000'
+alias vncserver='vncserver -geometry 1500x1000'
+alias vnc4server='vnc4server -geometry 1500x1000'
 
 # Operating system specfic code
 
