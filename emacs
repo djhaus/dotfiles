@@ -127,6 +127,13 @@
 (global-set-key [C-home] 'beginning-of-buffer)
 (global-set-key [C-end] 'end-of-buffer)
 
+; On Apple keyboards they are usually missing the home and end
+; keys so make some simple aliases for the functions the get
+; us to the beginning of the buffer and end of the buffer
+
+(defalias 'home 'beginning-of-buffer)
+(defalias 'end 'end-of-buffer)
+
 ; Re-map CTRL-J to jump to a specific line number
 
 (global-set-key "\C-j" 'goto-line)
