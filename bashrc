@@ -81,6 +81,12 @@ set +o noclobber	# allows redirection (>) to overwrite files
 
 set -o emacs		# chose one of 'vi', 'emacs'
 
+# Quilt settings
+
+export QUILT_REFRESH_ARGS="-p ab --strip-trailing-whitespace --backup"
+export QUILT_NO_DIFF_TIMESTAMPS=1
+export QUILT_DIFF_OPTS="-p -U 6"
+
 # If it exists, source the Bash aliases file
 
 if [ -f ~/.bash_aliases ]; then
