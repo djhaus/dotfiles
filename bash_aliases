@@ -15,6 +15,7 @@ alias rmrf='rm -rf'
 #alias rmrf="'rm' -rf"
 alias sshx='ssh -X'
 alias sshlab='ssh -l root'
+alias sshkvm='ssh -l sysadmin'
 alias type='type -all'
 alias vncserver='vncserver -geometry 1500x1000'
 alias vnc4server='vnc4server -geometry 1500x1000'
