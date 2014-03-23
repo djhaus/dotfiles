@@ -58,7 +58,7 @@ HISTCONTROL='ignoreboth'
 if [ -n "$PS1" ] ; then
 
    # Define the terminal characteristics
-   stty erase ^H intr ^C kill ^U start ^Q stop ^S susp ^Z
+#   stty erase ^H intr ^C kill ^U start ^Q stop ^S susp ^Z
 
    # set the window title if we can
    if [ -n "$DISPLAY" ] ; then
