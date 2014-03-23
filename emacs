@@ -90,9 +90,10 @@
 
 (setq next-line-add-newlines nil)
 
-; Turn off beeping on errors
+; Turn off beeping/flashing alarms
 
-(setq visible-bell t)
+;(setq visible-bell nil)
+(setq ring-bell-function 'ignore)
 
 ; Set the autosave directory and save file prefix
 
