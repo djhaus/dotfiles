@@ -75,7 +75,7 @@ function sshlab()
 	ssh -l root -t ${*:1} 'bash --rcfile <(echo "source /etc/profile; source ~/.bashrc_remote; source ~/.bash_aliases_remote"); rm ~/.bash*remote'
 }
 
-# Variable to hold different types of Akamai SSH keys
+# Variable to hold different types of SSH keys
 
 KEY_TYPES="internal external deployed"
 
@@ -95,8 +95,7 @@ ssh_mkkeys()
 	ln -sf ~/.ssh/$type/$KEYNAME.pub ~/.ssh/active/$type.pub
     done
 
-    # Set the permissions for the various SSH files according to what
-    # the Akamai guidelines suggest
+    # Set the permissions for the various SSH files
 
     chmod -R 700 ~/.ssh
     chmod go-rwx ~/.ssh/*
