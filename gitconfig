@@ -5,6 +5,7 @@
 	helper = osxkeychain
 [core]
 	editor = emacs
+	pager = less -r
 [color]
 	ui = true
 [filter "media"]
