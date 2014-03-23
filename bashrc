@@ -4,7 +4,7 @@
 if [ -z "$PS1" ]; then
     return
 else
-    echo "Executing $HOME/.bashrc"
+    echo "Executing $BASH_SOURCE"
 fi
 
 # If you have a bin directory, this adds it to the beginning of your

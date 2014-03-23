@@ -1,5 +1,7 @@
 # General command aliases 
 
+echo "Executing $BASH_SOURCE"
+
 alias cb='cbrowser'
 alias dir='ls'
 alias em='emacs'
@@ -14,7 +16,7 @@ alias rm='rm -i'
 alias rmrf='rm -rf'
 #alias rmrf="'rm' -rf"
 alias sshx='ssh -X'
-alias sshlab='ssh -l root'
+alias sshroot='ssh -l root'
 alias sshkvm='ssh -l sysadmin'
 alias type='type -all'
 alias vncserver='vncserver -geometry 1500x1000'
@@ -60,6 +62,17 @@ repeat()
     do
         "$@"
     done
+}
+
+# SSH related functions and aliases
+
+function sshlab()
+{
+#	scp ~/.bashrc root@$1:/tmp/$USER-bashrc	
+#	scp ~/.bash_aliases root@$1:/tmp/$USER-bash_aliases	
+	ssh -l root ${*:1} "cat > ~/.bashrc_remote" < ~/.bashrc_remote
+	ssh -l root ${*:1} "cat > ~/.bash_aliases_remote" < ~/.bash_aliases_remote
+	ssh -l root -t ${*:1} 'bash --rcfile <(echo "source /etc/profile; source ~/.bashrc_remote; source ~/.bash_aliases_remote"); rm ~/.bash*remote'
 }
 
 # Variable to hold different types of Akamai SSH keys
@@ -162,4 +175,5 @@ if [ $? -eq 0 ]; then
 	cleartool diff -graphical -pred $2 &
    }
 fi
+
 

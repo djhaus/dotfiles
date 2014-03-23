@@ -138,13 +138,13 @@
 
 (global-set-key "\C-j" 'goto-line)
 
-; Keybindings for my custome functions
+; Keybindings for my custom functions
 
 ;(global-set-key [f3] 'my-find-tag)
 ;(global-set-key [f4] 'next-find-tag)
-;(global-set-key [f5] 'mparen)
-;(global-set-key [f6] 'c-inside)
-;(global-set-key [f7] 'match-paren)
+(global-set-key [f5] 'mparen)
+(global-set-key [f6] 'c-inside)
+(global-set-key [f7] 'match-paren)
 
 ; When run on a Mac map the help key to be insert
 
