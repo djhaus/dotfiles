@@ -31,7 +31,7 @@ case "$OSTYPE" in
     darwin*)
 	echo "Running on Mac OS"
 	alias ls='ls -F -G'
-	alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
+	alias emacs='open -a /Applications/Emacs.app/Contents/MacOS/Emacs'
 	;;
     linux*)
 	echo "Running on Linux"
