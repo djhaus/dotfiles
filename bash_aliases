@@ -1,6 +1,6 @@
-# General command aliases 
-
 echo "Executing $BASH_SOURCE"
+
+# General command aliases 
 
 alias cb='cbrowser'
 alias dir='ls'
@@ -21,6 +21,13 @@ alias sshkvm='ssh -l sysadmin'
 alias type='type -all'
 alias vncserver='vncserver -geometry 1500x1000'
 alias vnc4server='vnc4server -geometry 1500x1000'
+
+# Directory aliases
+
+alias projects='cd ~/projects'
+alias akakernel='cd ~/projects/akakernel/'
+alias lkc='cd /projects/kernel'
+alias oird='cd /projects/alsi6'
 
 # Operating system specfic code
 
@@ -117,6 +124,22 @@ ssh_addkeys()
     done
 }
 
+# Check if Perforce is installed and load ClearCase aliases and functions
+
+hash p4 &> /dev/null
+
+if [ $? -eq 0 ]; then
+   
+   # p4 is present so Perforce must be installed
+
+   alias p4client='p4 client'
+   alias p4edit='p4 edit'
+   alias p4add='p4 add'
+   alias p4del='p4 delete'
+   alias p4revert='p4 revert'
+   alias p4diff='p4 diff'
+   alias p4submit='p4 submit'
+fi
 
 # Check if ClearCase is installed and load ClearCase aliases and functions
 
