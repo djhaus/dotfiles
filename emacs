@@ -149,8 +149,10 @@
 
 ; When run on a Mac map the help key to be insert
 
-(cond (running-osx
-       (global-set-key [help] 'overwrite-mode)))
+;(cond (running-osx
+;       (global-set-key [help] 'overwrite-mode)))
+
+(global-set-key [help] 'overwrite-mode)
 
 ; Allow selected text to be deleted by pressing the delete key
 
