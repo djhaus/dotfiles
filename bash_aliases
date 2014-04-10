@@ -90,7 +90,11 @@ KEY_TYPES="internal external deployed"
 
 ssh_mkkeys()
 {
+    # Make the active directory if it does not exist
+
     mkdir -p ~/.ssh/active
+
+    # Loop through the different types of keys
 
     for type in $KEY_TYPES
     do
@@ -112,6 +116,9 @@ ssh_mkkeys()
 
     cat ~/.ssh/active/internal.pub >> ~/.ssh/authorized_keys
 }
+
+# Function to go live with the 
+
 
 # Function to add SSH keys to agent
 
@@ -198,4 +205,20 @@ if [ $? -eq 0 ]; then
    }
 fi
 
+# Upload and install a kernel to a server
+
+function kinstall()
+{
+     # Copy the kernel to the server
+     
+     scp $1 root@$2:/var/tmp
+
+     # Copy the install script to the test machine
+
+     scp ~/projects/sandbox/johunt/install-kernel.sh root@$2:/var/tmp
+
+     # Login to the test machine, install the kernel, and reboot
+
+     ssh root@$2 "cd /var/tmp; ./install-kernel.sh $1"
+}
 
