@@ -38,7 +38,7 @@ case "$OSTYPE" in
     darwin*)
 	echo "Running on Mac OS"
 	alias ls='ls -F -G'
-	alias emacs='open -a /Applications/Emacs.app/Contents/MacOS/Emacs'
+	alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 	;;
     linux*)
 	echo "Running on Linux"
@@ -117,9 +117,6 @@ ssh_mkkeys()
     cat ~/.ssh/active/internal.pub >> ~/.ssh/authorized_keys
 }
 
-# Function to go live with the 
-
-
 # Function to add SSH keys to agent
 
 ssh_addkeys()
@@ -129,6 +126,17 @@ ssh_addkeys()
 	echo "Adding $type key to keychain"
 	ssh-add ~/.ssh/active/$type
     done
+}
+
+# Function to sync SSH keys from host to target
+
+ssh_synckeys()
+{
+   for type in $KEY_TYPES
+   do
+       echo "Syncing $type keys to $1"
+       scp ~/.ssh/$type/* $USER@$1:~/.ssh/$type/
+   done
 }
 
 # Check if Perforce is installed and load ClearCase aliases and functions
