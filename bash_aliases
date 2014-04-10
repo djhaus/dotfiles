@@ -128,14 +128,25 @@ ssh_addkeys()
     done
 }
 
-# Function to sync SSH keys from host to target
+# Function to push SSH keys from host to target
 
-ssh_synckeys()
+ssh_pushkeys()
 {
    for type in $KEY_TYPES
    do
-       echo "Syncing $type keys to $1"
+       echo "Pushing $type keys to $1"
        scp ~/.ssh/$type/* $USER@$1:~/.ssh/$type/
+   done
+}
+
+# Function to pull SSH keys from target to host
+
+ssh_pullkeys()
+{
+   for type in $KEY_TYPES
+   do
+       echo "Pulling $type keys from $1"
+       scp $USER@$1:~/.ssh/$type/* ~/.ssh/$type/
    done
 }
 
