@@ -395,6 +395,15 @@
   (insert-string "\n")
 )
 
+; Function to insert code review text
+
+(defun insert-code-review ()
+  ""
+  (interactive) 
+  (insert-string "Code review: results stored in CR <CR number>\n")
+  (insert-string "Code review: not needed since this is a minor change\n")
+)
+
 ; Function checks if this line of C is inside an outer "if", "while", etc...
 
 (defun c-inside ()
