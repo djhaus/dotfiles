@@ -19,8 +19,8 @@ alias sshx='ssh -X'
 alias sshroot='ssh -l root'
 alias sshkvm='ssh -l sysadmin'
 alias type='type -all'
-alias vncserver='vncserver -geometry 1500x1000'
-alias vnc4server='vnc4server -geometry 1500x1000'
+alias vncserver='vncserver -geometry 1800x1000'
+alias vnc4server='vnc4server -geometry 1800x1000'
 
 # Directory aliases
 
@@ -165,6 +165,34 @@ if [ $? -eq 0 ]; then
    alias p4revert='p4 revert'
    alias p4diff='p4 diff'
    alias p4submit='p4 submit'
+
+   # Aliases below try to map Clearcase terminology/syntax to Perforce 
+
+   # Make a Perforce branch
+
+   alias p4mkbr='p4 integrate -i -1 -d'
+
+   # Open aka 'checkout' a file for editing
+
+   alias p4co='p4 edit'
+
+   # List opened aka 'checkedout' files
+
+   alias p4lsco='p4 opened'
+
+   
+   function p4syncall()
+   {
+	OLD = $PWD
+	echo $OLD
+	for D in `find -maxdepth 0 ~/projects -type d`
+	do
+             echo $D
+#	     cd $D
+#             p4 sync
+        done
+        cd $OLD
+   }
 fi
 
 # Check if ClearCase is installed and load ClearCase aliases and functions
