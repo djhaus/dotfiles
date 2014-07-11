@@ -12,8 +12,11 @@
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
 [diff]
-	tool = tkdiff
+	tool = p4merge
 [merge]
-	tool = tkdiff
+	tool = p4merge
 [difftool]
+	prompt = false
+[mergetool]
+	keepTemporaries = false
 	prompt = false
