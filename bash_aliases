@@ -269,3 +269,10 @@ function kinstall()
      ssh root@$2 "cd /var/tmp; ./install-kernel.sh $1"
 }
 
+# Function to open up VNC access in iptables
+
+function iptables-enable-vnc()
+{
+	sudo iptables -A INPUT -p tcp --dport 5901 -j ACCEPT
+	sudo iptables -A INPUT -p udp --dport 5901 -j ACCEPT
+}
