@@ -52,6 +52,10 @@ export WINEDITOR=emacs
 
 HISTCONTROL='ignoreboth'
 
+# Set size of the .bash_history file to 3000 commands
+
+HISTIZE=3000
+
 # Things we should ONLY be doing if we're an interactive shell
 # we figure this out by $PS1 being set or not, so make sure you
 # don't do something silly like setting PS1 before this block
