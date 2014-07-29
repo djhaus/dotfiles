@@ -165,12 +165,9 @@ if [ $? -eq 0 ]; then
    alias p4revert='p4 revert'
    alias p4diff='p4 diff'
    alias p4submit='p4 submit'
+   alias p4sync='p4 sync ...'
 
    # Aliases below try to map Clearcase terminology/syntax to Perforce 
-
-   # Make a Perforce branch
-
-   alias p4mkbr='p4 integrate -i -1 -d'
 
    # Open aka 'checkout' a file for editing
 
@@ -178,21 +175,30 @@ if [ $? -eq 0 ]; then
 
    # List opened aka 'checkedout' files
 
-   alias p4lsco='p4 opened'
+   alias p4lsco='p4 opened ...'
 
+   # Function to make a Perforce branch
+
+   function p4mkbr()
+   {
+	p4 sync ...
+        p4 integrate -i -1 -d $1 $2
+	p4 resolve
+        p4 opened ...
+   }
    
    function p4syncall()
    {
-	OLD = $PWD
-	echo $OLD
-	for D in `find -maxdepth 0 ~/projects -type d`
+	OLD=$PWD
+	cd ~/projects
+	for D in `find ~/projects -mindepth 1 -maxdepth 1 -type d`
 	do
-             echo $D
-#	     cd $D
-#             p4 sync
+             cd $D
+             p4 sync ...
         done
         cd $OLD
    }
+
 fi
 
 # Check if ClearCase is installed and load ClearCase aliases and functions
