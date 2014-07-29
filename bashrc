@@ -7,6 +7,13 @@ else
     echo "Executing $BASH_SOURCE"
 fi
 
+# Add Perforce sandbox bin directory to the beginning of the PATH
+# so that these versions take precendence over tools later in the PATH
+
+if [ -d $HOME/projects/sandbox/$USER/bin ] ; then
+   PATH=$HOME/projects/sandbox/$USER/bin:$PATH
+fi
+
 # If you have a bin directory, this adds it to the beginning of your
 # PATH so that your versions of tools are selected first 
 
