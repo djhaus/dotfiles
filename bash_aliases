@@ -117,6 +117,29 @@ ssh_mkkeys()
     cat ~/.ssh/active/internal.pub >> ~/.ssh/authorized_keys
 }
 
+ssh_updatekeys()
+{
+    # Loop through the different types of keys
+
+    for type in $KEY_TYPES
+    do
+	KEYNAME=$USER-$type-`date +'%Y-%m-%d'`
+	echo "Updating $type key in $KEYNAME"
+	ln -sf ~/.ssh/$type/$KEYNAME ~/.ssh/active/$type
+	ln -sf ~/.ssh/$type/$KEYNAME.pub ~/.ssh/active/$type.pub
+    done
+
+    # Set the permissions for the various SSH files
+
+    chmod -R 700 ~/.ssh
+    chmod go-rwx ~/.ssh/*
+    chmod 644 ~/.ssh/known_hosts
+
+    # Append the new key to the local authorized_keys file
+
+    cat ~/.ssh/active/internal.pub >> ~/.ssh/authorized_keys
+}
+
 # Function to add SSH keys to agent
 
 ssh_addkeys()
@@ -137,6 +160,16 @@ ssh_pushkeys()
        echo "Pushing $type keys to $1"
        scp ~/.ssh/$type/* $USER@$1:~/.ssh/$type/
    done
+
+   # Set the permissions for the various SSH files
+
+#    chmod -R 700 ~/.ssh
+#    chmod go-rwx ~/.ssh/*
+#    chmod 644 ~/.ssh/known_hosts
+
+    # Append the new key to the local authorized_keys file
+
+#    cat ~/.ssh/active/internal.pub >> ~/.ssh/authorized_keys
 }
 
 # Function to pull SSH keys from target to host
