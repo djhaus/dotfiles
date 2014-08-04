@@ -308,6 +308,21 @@ function kinstall()
      ssh root@$2 "cd /var/tmp; ./install-kernel.sh $1"
 }
 
+# Prep a kernel for private build / modifications
+
+function kprep()
+{
+	dir=${1%.tar.*}
+	rm -rf $dir
+	xzcat -cd $1 | tar -xv
+	echo "Copying contents of patches/ to $dir/patches"
+	cp -R patches/ $dir/
+	echo "Copying ordering file to $dir/patches/series"
+	cp ordering $dir/patches/series
+	echo "Making all files in $dir/patches writable"
+        chmod +w $dir/patches/*
+}
+
 # Function to open up VNC access in iptables
 
 function iptables-enable-vnc()
