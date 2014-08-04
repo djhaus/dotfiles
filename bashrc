@@ -35,7 +35,7 @@ export PS1='\h:\W\$ '
 # Perforce related environment variables
 
 export P4EDITOR=emacs
-export P4DIFF=tkdiff
+export P4DIFF=p4merge
 export P4MERGE=p4merge
 
 # Which pager to use for viewing text, ie; more, less, pg, and
