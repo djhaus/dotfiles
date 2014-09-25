@@ -302,20 +302,14 @@
 ; Function to customize identation for C source code
 
 (defun my-c-mode-common-hook ()
-  (c-set-style "BSD")
+;  (c-set-style "BSD")
+  (c-set-style "linux")
   (column-number-mode 1)
-  (setq c-auto-newline nil)
-  (setq indent-tabs-mode nil)
-  (setq c-basic-offset 4))
-
-; Function to customize identation for C source code
-
-(defun my-c++-mode-common-hook ()
-  (c-set-style "BSD")
-  (column-number-mode 1)
-  (setq c-auto-newline nil)
-  (setq indent-tabs-mode nil)
-  (setq c-basic-offset 4))
+;  (setq c-auto-newline nil)
+;  (setq indent-tabs-mode nil)
+  (setq indent-tabs-mode t)
+;  (setq c-basic-offset 4))
+  (setq c-basic-offset 8))
 
 ; Run customized indentation functions for major modes
 
@@ -400,8 +394,8 @@
 (defun insert-code-review ()
   ""
   (interactive) 
-  (insert-string "Code review: results stored in CR <CR number>\n")
-  (insert-string "Code review: not needed since this is a minor change\n")
+  (insert-string "\tCode review: results stored in CR <number>\n")
+  (insert-string "\tCode review: not needed since this is a minor change\n")
 )
 
 ; Function checks if this line of C is inside an outer "if", "while", etc...
