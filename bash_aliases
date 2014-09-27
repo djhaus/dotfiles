@@ -12,6 +12,7 @@ alias hd='hexdump'
 alias lc='wc -l'
 alias lessl='less -N'
 alias pt='ps -u $USER'
+alias quiltdiff='quilt diff --diff=p4merge'
 alias rm='rm -i'
 alias rmrf='rm -rf'
 #alias rmrf="'rm' -rf"
@@ -313,14 +314,39 @@ function kinstall()
 function kprep()
 {
 	dir=${1%.tar.*}
+	ext=${1##*.}
 	rm -rf $dir
-	xzcat -cd $1 | tar -xv
+
+	if [ $ext == "xz" ]
+	then 
+	     xzcat -cd $1 | tar -xv
+	fi
+
+	if [ $ext == "bz2" ]
+	then
+	     bzcat -cd $1 | tar -xv
+        fi
+
 	echo "Copying contents of patches/ to $dir/patches"
 	cp -R patches/ $dir/
 	echo "Copying ordering file to $dir/patches/series"
 	cp ordering $dir/patches/series
 	echo "Making all files in $dir/patches writable"
-        chmod +w $dir/patches/*
+	chmod +w $dir/patches/*
+}
+
+# Function to download kernel files
+
+function wgetkernel()
+{
+	wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-$1.tar.xz
+	wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-$1.tar.sign
+}
+
+function wgetpatch()
+{
+	wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/patch-$1.xz
+	wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/patch-$1.sign
 }
 
 # Function to open up VNC access in iptables
