@@ -299,6 +299,14 @@
   (end-of-line)
   (kill-line))
 
+; Modify the '_' '.' and '/' characters to be part of the word class so that
+; when you double click on a variable name or filename it selects the whole
+; string and does not stop at the above mentioned characters
+
+(modify-syntax-entry ?_ "w")
+(modify-syntax-entry ?. "w")
+(modify-syntax-entry ?/ "w")
+
 ; Function to customize identation for C source code
 
 (defun my-c-mode-common-hook ()
