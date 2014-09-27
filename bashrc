@@ -7,20 +7,31 @@ else
     echo "Executing $BASH_SOURCE"
 fi
 
+# Function to prepend a directory to the beginning of the PATH
+
+path_prepend()
+{
+    if [ -d $1 ] ; then
+        PATH=${PATH//":$1"/}   #delete any instances in the middle or at the end
+        PATH=${PATH//"$1:"/}   #delete any instances at the beginning
+        export PATH="$1:$PATH" #prepend to beginning
+    fi
+}
+
 # Add Perforce sandbox bin directory to the beginning of the PATH
 # so that these versions take precendence over tools later in the PATH
 
-if [ -d $HOME/projects/sandbox/$USER/bin ] ; then
-   PATH=$HOME/projects/sandbox/$USER/bin:$PATH
-fi
+path_prepend "$HOME/projects/sandbox/$USER/bin"
 
 # If you have a bin directory, this adds it to the beginning of your
 # PATH so that your versions of tools are selected first 
 
-if [ -d $HOME/bin ] ; then
-   PATH=$HOME/bin:$PATH
+path_prepend "$HOME/bin"
+
+#if [ -d $HOME/bin ] ; then
+#   PATH=$HOME/bin:$PATH
 #   PATH=$PATH:$HOME/bin
-fi
+#fi
 
 # It's considered bad practice to have the current directory in your PATH,
 # however many users like having it. This should always appear at the END
@@ -62,7 +73,7 @@ HISTCONTROL='ignoreboth'
 
 # Set size of the .bash_history file to 3000 commands
 
-HISTIZE=3000
+HISTIZE=5000
 
 # Things we should ONLY be doing if we're an interactive shell
 # we figure this out by $PS1 being set or not, so make sure you
@@ -74,6 +85,7 @@ if [ -n "$PS1" ] ; then
 #   stty erase ^H intr ^C kill ^U start ^Q stop ^S susp ^Z
 
    # set the window title if we can
+
    if [ -n "$DISPLAY" ] ; then
       if [ -n "$CLEARCASE_ROOT" ] ; then
       	 PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME}(${CLEARCASE_ROOT##*/}) ${LOGNAME} ${PWD}\007"'
@@ -99,6 +111,8 @@ set -o emacs		# chose one of 'vi', 'emacs'
 export QUILT_REFRESH_ARGS="-p ab --strip-trailing-whitespace --backup"
 export QUILT_NO_DIFF_TIMESTAMPS=1
 export QUILT_DIFF_OPTS="-p -U 6"
+export QUILT_EDITOR="emacs"
+
 
 # If it exists, source the Bash aliases file
 
