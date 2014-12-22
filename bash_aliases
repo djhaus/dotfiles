@@ -123,10 +123,12 @@ ssh_updatekeys()
 
     for type in $KEY_TYPES
     do
-	KEYNAME=$USER-$type-`date +'%Y-%m-%d'`
-	echo "Updating $type key in $KEYNAME"
-	ln -sf ~/.ssh/$type/$KEYNAME ~/.ssh/active/$type
-	ln -sf ~/.ssh/$type/$KEYNAME.pub ~/.ssh/active/$type.pub
+	KEYNAME=`/bin/ls -1t ~/.ssh/$type/* | head -n1`
+	PUBKEYNAME=`/bin/ls -1t ~/.ssh/$type/*.pub | head -n1`
+	echo "Updating ~/.ssh/active/$type -> $KEYNAME"
+	echo "Updating ~/.ssh/active/$type.pub -> $PUBKEYNAME"
+	ln -sf $KEYNAME ~/.ssh/active/$type
+	ln -sf $PUBKEYNAME  ~/.ssh/active/$type.pub
     done
 
     # Set the permissions for the various SSH files
@@ -222,14 +224,10 @@ if [ $? -eq 0 ]; then
    
    function p4syncall()
    {
-	OLD=$PWD
-	cd ~/projects
 	for D in `find ~/projects -mindepth 1 -maxdepth 1 -type d`
 	do
-             cd $D
-             p4 sync ...
+             p4 -d $D sync ...
         done
-        cd $OLD
    }
 
 fi
