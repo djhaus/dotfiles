@@ -19,8 +19,8 @@ alias sshx='ssh -X'
 alias sshroot='ssh -l root'
 alias sshkvm='ssh -l sysadmin'
 alias type='type -all'
-alias vncserver='vncserver -geometry 1850x1100'
-alias vnc4server='vnc4server -geometry 1850x1100'
+alias vncserver='vncserver -geometry 1850x1080'
+alias vnc4server='vnc4server -geometry 1850x1080'
 
 # Directory aliases
 
