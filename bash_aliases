@@ -15,13 +15,12 @@ alias pt='ps -u $USER'
 alias quiltdiff='quilt diff --diff=p4merge'
 alias rm='rm -i'
 alias rmrf='rm -rf'
-#alias rmrf="'rm' -rf"
 alias sshx='ssh -X'
 alias sshroot='ssh -l root'
 alias sshkvm='ssh -l sysadmin'
 alias type='type -all'
-alias vncserver='vncserver -geometry 1850x1000'
-alias vnc4server='vnc4server -geometry 1850x1000'
+alias vncserver='vncserver -geometry 1850x1100'
+alias vnc4server='vnc4server -geometry 1850x1100'
 
 # Directory aliases
 
@@ -184,7 +183,7 @@ ssh_pullkeys()
    done
 }
 
-# Check if Perforce is installed and load ClearCase aliases and functions
+# Check if Perforce is installed and load Perforce aliases and functions
 
 hash p4 &> /dev/null
 
@@ -296,17 +295,23 @@ fi
 
 function kinstall()
 {
-     # Copy the kernel to the server
-     
-     scp $1 root@$2:/var/tmp
+	if [ -f $1 ]; then
 
-     # Copy the install script to the test machine
+	   # Copy the kernel to the server
 
-     scp ~/projects/sandbox/johunt/install-kernel.sh root@$2:/var/tmp
+	   scp $1 root@$2:/var/tmp
 
-     # Login to the test machine, install the kernel, and reboot
+     	   # Copy the install script to the test machine
 
-     ssh root@$2 "cd /var/tmp; ./install-kernel.sh $1"
+     	   scp ~/projects/sandbox/johunt/install-kernel.sh root@$2:/var/tmp
+
+     	   # Login to the test machine, install the kernel, and reboot
+
+     	   ssh root@$2 "cd /var/tmp; ./install-kernel.sh $1"
+
+	else
+	   echo "File $1 does not exist\n"
+        fi
 }
 
 # Prep a kernel for private build / modifications
@@ -326,13 +331,6 @@ function kprep()
 	then
 	     bzcat -cd $1 | tar -xv
         fi
-
-	echo "Copying contents of patches/ to $dir/patches"
-	cp -R patches/ $dir/
-	echo "Copying ordering file to $dir/patches/series"
-	cp ordering $dir/patches/series
-	echo "Making all files in $dir/patches writable"
-	chmod +w $dir/patches/*
 }
 
 # Function to download kernel files
@@ -355,4 +353,14 @@ function iptables-enable-vnc()
 {
 	sudo iptables -A INPUT -p tcp --dport 5901 -j ACCEPT
 	sudo iptables -A INPUT -p udp --dport 5901 -j ACCEPT
+}
+
+# Function to refresh kernel configuration patches
+
+function krefresh()
+{
+	for x in akamai/config.akamai-*;
+	do cp $x .config;
+	make oldconfig; cp .config $x;
+	done
 }

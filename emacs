@@ -306,6 +306,8 @@
 (modify-syntax-entry ?_ "w")
 (modify-syntax-entry ?. "w")
 (modify-syntax-entry ?/ "w")
+(modify-syntax-entry ?- "w")
+(modify-syntax-entry ?> "w")
 
 ; Function to customize identation for C source code
 
@@ -403,7 +405,7 @@
   ""
   (interactive) 
   (insert-string "\tCode review: results stored in CR <number>\n")
-  (insert-string "\tCode review: not needed since this is a minor change\n")
+  (insert-string "\tCode review: not needed since this is a minor change")
 )
 
 ; Function checks if this line of C is inside an outer "if", "while", etc...
