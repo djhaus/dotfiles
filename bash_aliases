@@ -160,7 +160,18 @@ ssh_pushkeys()
    for type in $KEY_TYPES
    do
        echo "Pushing $type keys to $1"
-       scp ~/.ssh/$type/* $USER@$1:~/.ssh/$type/
+       scp -p ~/.ssh/$type/* $USER@$1:~/.ssh/$type/
+   done
+}
+
+# Function to pull SSH keys from target to host
+
+ssh_pullkeys()
+{
+   for type in $KEY_TYPES
+   do
+       echo "Pulling $type keys from $1"
+       scp -p $USER@$1:~/.ssh/$type/* ~/.ssh/$type/
    done
 
    # Set the permissions for the various SSH files
@@ -172,17 +183,6 @@ ssh_pushkeys()
     # Append the new key to the local authorized_keys file
 
 #    cat ~/.ssh/active/internal.pub >> ~/.ssh/authorized_keys
-}
-
-# Function to pull SSH keys from target to host
-
-ssh_pullkeys()
-{
-   for type in $KEY_TYPES
-   do
-       echo "Pulling $type keys from $1"
-       scp $USER@$1:~/.ssh/$type/* ~/.ssh/$type/
-   done
 }
 
 # Check if Perforce is installed and load Perforce aliases and functions
