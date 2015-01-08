@@ -92,7 +92,7 @@ ssh_mkkeys()
 {
     # Make the active directory if it does not exist
 
-    mkdir -p ~/.ssh/active
+    mkdir -pv ~/.ssh/active
 
     # Loop through the different types of keys
 
@@ -117,15 +117,18 @@ ssh_mkkeys()
     cat ~/.ssh/active/internal.pub >> ~/.ssh/authorized_keys
 }
 
-ssh_updatekeys()
+ssh_activatekeys()
 {
+    # Make the active directory if it does not exist
+
+    mkdir -pv ~/.ssh/active
+
     # Loop through the different types of keys
 
     for type in $KEY_TYPES
     do
 	KEYNAME=`/bin/ls -1t ~/.ssh/$type/* | head -n1`
 	PUBKEYNAME=`/bin/ls -1t ~/.ssh/$type/*.pub | head -n1`
-	mkdir -pv ~/.ssh/active
 	echo "Updating ~/.ssh/active/$type -> $KEYNAME"
 	echo "Updating ~/.ssh/active/$type.pub -> $PUBKEYNAME"
 	ln -sf $KEYNAME ~/.ssh/active/$type
@@ -179,9 +182,9 @@ ssh_pullkeys()
 
    # Set the permissions for the various SSH files
 
-#    chmod -R 700 ~/.ssh
-#    chmod go-rwx ~/.ssh/*
-#    chmod 644 ~/.ssh/known_hosts
+    chmod -R 700 ~/.ssh
+    chmod go-rwx ~/.ssh/*
+    chmod 644 ~/.ssh/known_hosts
 
     # Append the new key to the local authorized_keys file
 
