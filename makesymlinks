@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="bash_profile bashrc bash_aliases emacs gitconfig Xdefaults Xresources"
+DOTFILES="bash_profile bashrc bash_aliases emacs gitconfig quiltrc Xdefaults Xresources"
 
 for file in $DOTFILES
 do

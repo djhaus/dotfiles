@@ -229,7 +229,6 @@ if [ $? -eq 0 ]; then
              p4 -d $D sync ...
         done
    }
-
 fi
 
 # Check if ClearCase is installed and load ClearCase aliases and functions
