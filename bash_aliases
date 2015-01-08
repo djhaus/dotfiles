@@ -125,6 +125,7 @@ ssh_updatekeys()
     do
 	KEYNAME=`/bin/ls -1t ~/.ssh/$type/* | head -n1`
 	PUBKEYNAME=`/bin/ls -1t ~/.ssh/$type/*.pub | head -n1`
+	mkdir -pv ~/.ssh/active
 	echo "Updating ~/.ssh/active/$type -> $KEYNAME"
 	echo "Updating ~/.ssh/active/$type.pub -> $PUBKEYNAME"
 	ln -sf $KEYNAME ~/.ssh/active/$type
@@ -160,6 +161,7 @@ ssh_pushkeys()
    for type in $KEY_TYPES
    do
        echo "Pushing $type keys to $1"
+       ssh $1 mkdir -pv .ssh/$type
        scp -p ~/.ssh/$type/* $USER@$1:~/.ssh/$type/
    done
 }
@@ -171,6 +173,7 @@ ssh_pullkeys()
    for type in $KEY_TYPES
    do
        echo "Pulling $type keys from $1"
+       mkdir -pv ~/.ssh/$type
        scp -p $USER@$1:~/.ssh/$type/* ~/.ssh/$type/
    done
 
