@@ -39,6 +39,7 @@ case "$OSTYPE" in
 	echo "Running on Mac OS"
 	alias ls='ls -F -G'
 	alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
+	alias vnc='/Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer'
 	;;
     linux*)
 	echo "Running on Linux"
