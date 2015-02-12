@@ -21,6 +21,7 @@ alias sshkvm='ssh -l sysadmin'
 alias type='type -all'
 alias vncserver='vncserver -geometry 1850x1080'
 alias vnc4server='vnc4server -geometry 1850x1080'
+alias ssh_tunnel_vnc='ssh -o TCPKeepAlive=yes -t -L 5901:localhost:5901 bos-lpt1r sudo x11vnc -safer -localhost -once -nopw -display :0 -modtweak -xkb -rfbport 5901 -repeat -auth /var/run/lightdm/root/:0'
 
 # Directory aliases
 
