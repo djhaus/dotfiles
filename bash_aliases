@@ -219,6 +219,13 @@ if [ $? -eq 0 ]; then
 
    alias p4lsco='p4 opened ...'
 
+   case "$OSTYPE" in
+    darwin*)
+	alias p4merge='/Applications/p4merge.app/Contents/MacOS/p4merge'
+	alias p4v='/applications/p4v.app/Contents/MacOS/p4v'
+	;;
+   esac
+
    # Function to make a Perforce branch
 
    function p4mkbr()
