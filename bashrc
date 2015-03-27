@@ -27,6 +27,9 @@ path_prepend "/u4/syscomm/bin"
 
 path_prepend "$HOME/projects/sandbox/$USER/bin"
 
+#path_prepend "$HOME/bin/p4sandbox-2012.3.640073/bin"
+path_prepend "$HOME/bin/p4v-2014.3.1007540/bin"
+
 # If you have a bin directory, this adds it to the beginning of your
 # PATH so that your versions of tools are selected first 
 

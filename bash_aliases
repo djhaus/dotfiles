@@ -19,7 +19,7 @@ alias sshx='ssh -X'
 alias sshroot='ssh -l root'
 alias sshkvm='ssh -l sysadmin'
 alias type='type -all'
-alias vncserver='vncserver -geometry 1850x1080'
+#alias vncserver='vncserver -geometry 1850x1080'
 alias vnc4server='vnc4server -geometry 1850x1080'
 
 # Directory aliases
@@ -321,19 +321,11 @@ function kinstall()
 
 function kprep()
 {
-	dir=${1%.tar.*}
-	ext=${1##*.}
-	rm -rf $dir
-
-	if [ $ext == "xz" ]
-	then 
-	     xzcat -cd $1 | tar -xv
-	fi
-
-	if [ $ext == "bz2" ]
-	then
-	     bzcat -cd $1 | tar -xv
-        fi
+	mkdir linux
+	tar -xvf $1 --strip 1 -C linux
+#	cd linux
+#	quilt push -a
+#	cp linux/akamai/config.akamai-amd64 linux/.config
 }
 
 # Function to download kernel files
