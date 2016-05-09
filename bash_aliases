@@ -149,6 +149,26 @@ ssh_activatekeys()
     cat ~/.ssh/active/internal.pub >> ~/.ssh/authorized_keys
 }
 
+# Function to load SSH keys
+
+ssh_load_keys()
+{
+     KEYS=""
+     pushd ~/.ssh/active > /dev/null 2>&1
+
+     # Anything that has a corresponding .pub file should be a key that needs
+     # to be loaded
+
+     for entry in `find . -type f -name "*.pub"` ; do
+     	 FILE=`echo $entry | sed 's/\.\/\([^.]*\)\.pub/\1/g'`
+	 if [ -e "./$FILE" ] ; then
+	    KEYS="$KEYS $FILE"
+	 fi
+     done
+     popd > /dev/null 2>&1
+     eval $(keychain --eval --quiet $KEYS)
+}
+
 # Function to add SSH keys to agent
 
 ssh_addkeys()
