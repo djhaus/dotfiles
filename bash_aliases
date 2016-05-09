@@ -41,6 +41,7 @@ case "$OSTYPE" in
 	alias ls='ls -F -G'
 	alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 	alias vncviewer='/Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer'
+	alias dns-flush='sudo killall -HUP mDNSResponder'
 	;;
     linux*)
 	echo "Running on Linux"
