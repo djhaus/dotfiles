@@ -174,7 +174,6 @@ ssh_load_keys()
      done
      popd > /dev/null 2>&1
      eval $(keychain --eval --quiet $KEYS)
->>>>>>> 59870dd22e65556c610c9400f6b5a7773fabad75
 }
 
 # Function to add SSH keys to agent
