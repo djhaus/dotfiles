@@ -41,6 +41,7 @@ case "$OSTYPE" in
 	alias ls='ls -F -G'
 	alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 	alias vncviewer='/Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer'
+	alias dns-flush='sudo killall -HUP mDNSResponder'
 	;;
     linux*)
 	echo "Running on Linux"
@@ -148,11 +149,32 @@ ssh_activatekeys()
     cat ~/.ssh/active/internal.pub >> ~/.ssh/authorized_keys
 }
 
+<<<<<<< HEAD
 ssh_verifykeys()
 {
 	ssh kvinternal@ssh-keyrotation.akamai.com
 	ssh kvexternal@ssh-keyrotation.akamai.com
 	ssh kvdeployed@ssh-keyrotation.akamai.com
+=======
+# Function to load SSH keys
+
+ssh_load_keys()
+{
+     KEYS=""
+     pushd ~/.ssh/active > /dev/null 2>&1
+
+     # Anything that has a corresponding .pub file should be a key that needs
+     # to be loaded
+
+     for entry in `find . -type f -name "*.pub"` ; do
+     	 FILE=`echo $entry | sed 's/\.\/\([^.]*\)\.pub/\1/g'`
+	 if [ -e "./$FILE" ] ; then
+	    KEYS="$KEYS $FILE"
+	 fi
+     done
+     popd > /dev/null 2>&1
+     eval $(keychain --eval --quiet $KEYS)
+>>>>>>> 59870dd22e65556c610c9400f6b5a7773fabad75
 }
 
 # Function to add SSH keys to agent
