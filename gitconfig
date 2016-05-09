@@ -1,8 +1,6 @@
 [user]
 	name = David Amenhauser
 	email = damenhau@akamai.com
-[credential]
-	helper = osxkeychain
 [core]
 	editor = emacs
 	pager = less -r
