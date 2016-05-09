@@ -20,7 +20,7 @@ path_prepend()
 
 # Add the syscomm bin directory to the beginning of the PATH
 
-path_prepend "/u4/syscomm/bin"
+#path_prepend "/u4/syscomm/bin"
 
 # Add Perforce sandbox bin directory to the beginning of the PATH
 # so that these versions take precendence over tools later in the PATH

@@ -20,3 +20,5 @@
 [mergetool]
 	keepTemporaries = false
 	prompt = false
+[push]
+	default = simple

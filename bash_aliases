@@ -148,6 +148,13 @@ ssh_activatekeys()
     cat ~/.ssh/active/internal.pub >> ~/.ssh/authorized_keys
 }
 
+ssh_verifykeys()
+{
+	ssh kvinternal@ssh-keyrotation.akamai.com
+	ssh kvexternal@ssh-keyrotation.akamai.com
+	ssh kvdeployed@ssh-keyrotation.akamai.com
+}
+
 # Function to add SSH keys to agent
 
 ssh_addkeys()
