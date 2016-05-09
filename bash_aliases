@@ -149,13 +149,13 @@ ssh_activatekeys()
     cat ~/.ssh/active/internal.pub >> ~/.ssh/authorized_keys
 }
 
-<<<<<<< HEAD
 ssh_verifykeys()
 {
 	ssh kvinternal@ssh-keyrotation.akamai.com
 	ssh kvexternal@ssh-keyrotation.akamai.com
 	ssh kvdeployed@ssh-keyrotation.akamai.com
-=======
+}
+
 # Function to load SSH keys
 
 ssh_load_keys()
