@@ -166,14 +166,14 @@ ssh_load_keys()
      # Anything that has a corresponding .pub file should be a key that needs
      # to be loaded
 
-     for entry in `find . -type f -name "*.pub"` ; do
+     for entry in `find . -name "*.pub"` ; do
      	 FILE=`echo $entry | sed 's/\.\/\([^.]*\)\.pub/\1/g'`
 	 if [ -e "./$FILE" ] ; then
 	    KEYS="$KEYS $FILE"
 	 fi
      done
-     popd > /dev/null 2>&1
      eval $(keychain --eval --quiet $KEYS)
+     popd > /dev/null 2>&1
 }
 
 # Function to add SSH keys to agent
